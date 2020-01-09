@@ -11,6 +11,10 @@ typedef void HideCustomViewCallback();
 typedef void ProgressChangedCallback(int progress);
 typedef void MessageReceived(String name, String data);
 
+const WEB_VIEW_MIXED_CONTENT_ALWAYS_ALLOW = 0;
+const WEB_VIEW_MIXED_CONTENT_NEVER_ALLOW = 1;
+const WEB_VIEW_MIXED_CONTENT_COMPATIBILITY_MODE = 2;
+
 class X5WebView extends StatefulWidget {
   final url;
   final X5WebViewCreatedCallback onWebViewCreated;
@@ -19,11 +23,15 @@ class X5WebView extends StatefulWidget {
   final HideCustomViewCallback onHideCustomView;
   final ProgressChangedCallback onProgressChanged;
   final bool javaScriptEnabled;
+  final String userAgent;
+  final int mixedContentMode;
 
   const X5WebView(
       {Key key,
       this.url,
       this.javaScriptEnabled = false,
+      this.userAgent,
+      this.mixedContentMode,
       this.onWebViewCreated,
       this.onPageFinished,
       this.onShowCustomView,
@@ -168,17 +176,29 @@ class X5WebViewController {
 }
 
 class _CreationParams {
-  _CreationParams({this.url, this.javaScriptEnabled, this.jsChannelName});
+  _CreationParams({this.url, this.javaScriptEnabled, this.jsChannelName, this.userAgent, this.mixedContentMode});
 
   static _CreationParams fromWidget(X5WebView widget) {
-    return _CreationParams(url: widget.url, javaScriptEnabled: widget.javaScriptEnabled);
+    return _CreationParams(
+        url: widget.url,
+        javaScriptEnabled: widget.javaScriptEnabled,
+        userAgent: widget.userAgent,
+        mixedContentMode: widget.mixedContentMode);
   }
 
   final String url;
   final bool javaScriptEnabled;
   final String jsChannelName;
+  final String userAgent;
+  final int mixedContentMode;
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'url': url, 'javaScriptEnabled': javaScriptEnabled, "jsChannelName": jsChannelName};
+    return <String, dynamic>{
+      'url': url,
+      'javaScriptEnabled': javaScriptEnabled,
+      "jsChannelName": jsChannelName,
+      'userAgent': userAgent,
+      'mixedContentMode': mixedContentMode,
+    };
   }
 }

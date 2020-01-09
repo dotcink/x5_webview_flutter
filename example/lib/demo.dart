@@ -37,6 +37,8 @@ class _DemoWebViewPageState extends State<DemoWebViewPage> {
                     ? X5WebView(
                         url: url,
                         javaScriptEnabled: true,
+                        userAgent: 'hello test user agent',
+                        mixedContentMode: WEB_VIEW_MIXED_CONTENT_COMPATIBILITY_MODE,
                         onWebViewCreated: (control) {
                           _controller = control;
                         },

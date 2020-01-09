@@ -22,6 +22,8 @@ class X5WebView(private val context: Context, val id: Int, val params: Map<Strin
         webView.apply {
             settings.javaScriptEnabled = params["javaScriptEnabled"] as Boolean
             settings.domStorageEnabled = true
+            if (params.containsKey("userAgent")) settings.setUserAgent(params["userAgent"] as String?)
+            if (params.containsKey("mixedContentMode")) settings.mixedContentMode = params["mixedContentMode"] as Int
             loadUrl(params["url"].toString())
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {

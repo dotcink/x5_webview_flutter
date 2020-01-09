@@ -44,6 +44,8 @@ return Scaffold(
           ? X5WebView(
               url: "http://debugtbs.qq.com",
               javaScriptEnabled: true,
+              userAgent: 'hello test user agent',
+              mixedContentMode: WEB_VIEW_MIXED_CONTENT_COMPATIBILITY_MODE,
               onWebViewCreated: (control) {
                 _controller = control;
               },
