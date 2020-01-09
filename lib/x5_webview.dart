@@ -94,8 +94,7 @@ class X5WebViewController {
     });
   }
 
-  Future<void> addJavascriptChannels(
-      List<String> names, MessageReceived callback) async {
+  Future<void> addJavascriptChannels(List<String> names, MessageReceived callback) async {
     assert(names != null);
     await _channel.invokeMethod("addJavascriptChannels", {'names': names});
     _channel.setMethodCallHandler((call) {
@@ -162,8 +161,7 @@ class X5WebViewController {
         }
         break;
       default:
-        throw MissingPluginException(
-            '${call.method} was invoked but has no handler');
+        throw MissingPluginException('${call.method} was invoked but has no handler');
         break;
     }
   }
@@ -173,8 +171,7 @@ class _CreationParams {
   _CreationParams({this.url, this.javaScriptEnabled, this.jsChannelName});
 
   static _CreationParams fromWidget(X5WebView widget) {
-    return _CreationParams(
-        url: widget.url, javaScriptEnabled: widget.javaScriptEnabled);
+    return _CreationParams(url: widget.url, javaScriptEnabled: widget.javaScriptEnabled);
   }
 
   final String url;
@@ -182,10 +179,6 @@ class _CreationParams {
   final String jsChannelName;
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'url': url,
-      'javaScriptEnabled': javaScriptEnabled,
-      "jsChannelName": jsChannelName
-    };
+    return <String, dynamic>{'url': url, 'javaScriptEnabled': javaScriptEnabled, "jsChannelName": jsChannelName};
   }
 }

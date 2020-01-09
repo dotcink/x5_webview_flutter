@@ -41,14 +41,12 @@ class _DemoWebViewPageState extends State<DemoWebViewPage> {
                           _controller = control;
                         },
                         onPageFinished: () async {
-                          var isSuccess =
-                              await _controller.isX5WebViewLoadSuccess();
+                          var isSuccess = await _controller.isX5WebViewLoadSuccess();
                           print(isSuccess ? "x5内核加载成功" : "x5内核加载失败");
                           var url = await _controller.currentUrl();
                           print(url);
                           var listName = ["X5Web", "Toast"];
-                          _controller.addJavascriptChannels(listName,
-                              (name, data) {
+                          _controller.addJavascriptChannels(listName, (name, data) {
                             switch (name) {
                               case "X5Web":
                                 showDialog(
@@ -89,8 +87,7 @@ class _DemoWebViewPageState extends State<DemoWebViewPage> {
                 ),
             RaisedButton(
               onPressed: () {
-                _controller.evaluateJavascript(
-                    'document.getElementById("input").value="flutter调用js成功！"');
+                _controller.evaluateJavascript('document.getElementById("input").value="flutter调用js成功！"');
               },
               child: Text("flutter调用js(更改文字)"),
             )

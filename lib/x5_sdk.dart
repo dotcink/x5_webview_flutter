@@ -43,10 +43,7 @@ class X5Sdk {
   ///screenMode 播放参数，103横屏全屏，104竖屏全屏。默认103
   static Future<void> openVideo(String url, {int screenMode}) async {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      final Map<String, dynamic> params = <String, dynamic>{
-        'screenMode': screenMode ?? 103,
-        'url': url
-      };
+      final Map<String, dynamic> params = <String, dynamic>{'screenMode': screenMode ?? 103, 'url': url};
       return await _channel.invokeMethod("openVideo", params);
     } else {
       return;
@@ -96,10 +93,7 @@ class X5Sdk {
       menuItems 是 json 数组，表示菜单中的每一项。
    */
   static Future<String> openFile(String filePath,
-      {String local,
-      String style,
-      String topBarBgColor,
-      String menuData}) async {
+      {String local, String style, String topBarBgColor, String menuData}) async {
     if (defaultTargetPlatform == TargetPlatform.android) {
       final Map<String, String> params = <String, String>{
         'filePath': filePath,
@@ -117,10 +111,7 @@ class X5Sdk {
   ///打开简单的x5webview
   static Future<void> openWebActivity(String url, {String title}) async {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      final Map<String, dynamic> params = <String, dynamic>{
-        'title': title,
-        'url': url
-      };
+      final Map<String, dynamic> params = <String, dynamic>{'title': title, 'url': url};
       return await _channel.invokeMethod("openWebActivity", params);
     } else {
       return;
@@ -141,8 +132,7 @@ class X5Sdk {
           listener.onDownloadProgress(call.arguments);
           break;
         default:
-          throw MissingPluginException(
-              '${call.method} was invoked but has no handler');
+          throw MissingPluginException('${call.method} was invoked but has no handler');
           break;
       }
       return;
@@ -165,6 +155,5 @@ class X5SdkListener {
   ///下载进度监听
   DownloadProgress onDownloadProgress;
 
-  X5SdkListener(
-      this.onInstallFinish, this.onDownloadFinish, this.onDownloadProgress);
+  X5SdkListener(this.onInstallFinish, this.onDownloadFinish, this.onDownloadProgress);
 }

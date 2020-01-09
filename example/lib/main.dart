@@ -1,10 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:x5_webview/x5_sdk.dart';
 
 import 'demo.dart';
-
-import 'package:dio/dio.dart';
 
 void main() {
   X5Sdk.setDownloadWithoutWifi(true); //没有x5内核，是否在非wifi模式下载内核。默认false
@@ -48,8 +47,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             RaisedButton(
                 onPressed: () async {
-                  X5Sdk.openWebActivity("http://debugtbs.qq.com",
-                      title: "X5内核信息");
+                  X5Sdk.openWebActivity("http://debugtbs.qq.com", title: "X5内核信息");
                 },
                 child: Text("查看X5内核信息")),
             RaisedButton(
@@ -60,8 +58,7 @@ class _HomePageState extends State<HomePage> {
                         onConfirm: (url) async {
                           await X5Sdk.openVideo(url);
                         },
-                        defaultText:
-                            "https://youku.com-l-youku.com/20181221/5625_d9733a43/index.m3u8");
+                        defaultText: "https://youku.com-l-youku.com/20181221/5625_d9733a43/index.m3u8");
                   } else {
                     print("x5Video不可用");
                   }
@@ -95,8 +92,7 @@ class _HomePageState extends State<HomePage> {
                                             children: <Widget>[
                                               CircularProgressIndicator(),
                                               Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 20),
+                                                padding: EdgeInsets.only(top: 20),
                                               ),
                                               Text("等待下载")
                                             ],
@@ -117,8 +113,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             FlatButton(
                               onPressed: () async {
-                                var msg = await X5Sdk.openFile(
-                                    "/sdcard/download/FileList.xlsx");
+                                var msg = await X5Sdk.openFile("/sdcard/download/FileList.xlsx");
                                 print(msg);
                               },
                               child: Text("打开"),
@@ -137,8 +132,7 @@ class _HomePageState extends State<HomePage> {
 
                   showInputDialog(
                       onConfirm: (url) {
-                        Navigator.of(context).push(
-                            CupertinoPageRoute(builder: (BuildContext context) {
+                        Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext context) {
                           return DemoWebViewPage(url);
                         }));
                       },
@@ -160,8 +154,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void showInputDialog(
-      {@required ConfirmCallBack onConfirm, String defaultText = ""}) {
+  void showInputDialog({@required ConfirmCallBack onConfirm, String defaultText = ""}) {
     final _controller = TextEditingController(text: defaultText);
     showDialog(
         context: context,
